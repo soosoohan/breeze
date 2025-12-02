@@ -405,13 +405,10 @@ window.onload = () => {
   }
 
   fetch('wordpools/' + poolFile + '.json')
-    .then(res => {
-      if (!res.ok) throw new Error('Failed to load word pool');
-      return res.json();
-    })
+    .then(res => res.json())
     .then(data => {
-      document.getElementById('game-title').textContent = data.title || 'Woffers Breeze';
-      const rawText = data.description || 'Solo challenge';
+      document.getElementById('game-title').textContent = data.title || '게임 제목';
+      const rawText = data.description || '게임 설명';
       const htmlText = rawText.replace(/\n/g, '<br>');
       document.getElementById('game-desc').innerHTML = htmlText;
 
@@ -420,6 +417,9 @@ window.onload = () => {
         const count = data.wordCount[length] || 0;
         words.push(...getRandomSample(data.words[length], count));
       }
+      console.log('총 단어 수:', words.length);
+      console.log('단어 목록:', words);
+      
       init();
     })
     .catch(err => {
