@@ -669,16 +669,17 @@ function placeDaisies(count) {
   console.log('배치된 데이지 수:', daisies.size);
 }
 
-//function fillEmptyCells() {
-//  const filler = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-//  shuffle(filler);
-//  let i = 0;
-//  for (let j = 0; j < totalCells; j++) {
-//    if (!board[j]) {
-//      board[j] = filler[i++ % filler.length];
-//    }
-//  }
-//}
+function fillEmptyCells() {
+  // 꽃밭 테마 - 부드러운 색감의 꽃들
+  const filler = ['🌸', '🌺', '🌻', '🌷', '🌹', '💐', '🏵️', '💮', '🌾', '🌿'];
+  shuffle(filler);
+  let i = 0;
+  for (let j = 0; j < totalCells; j++) {
+    if (!board[j]) {
+      board[j] = filler[i++ % filler.length];
+    }
+  }
+}
 
 function reveal(index) {
   if (revealed[index]) return;
