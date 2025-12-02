@@ -422,11 +422,8 @@ window.onload = () => {
       
       init();
     })
-    .catch(err => {
-      console.log('워드풀 로딩 실패, 기본 단어로 게임 시작:', err.message);
-      // 기본 단어로 게임 시작
-      words = ['계륵', '각골난망', '각주구검', '거두절미', '개과천선', '감지덕지', '감언이설', '결초보은','경천동지', '견물생심', '견원지간', '결자해지', '소문만복래'];
-      init();
+  .catch(err => {
+      document.body.innerHTML = '<p>❌ 워드풀 로딩 중 오류 발생: ' + err.message + '</p>';
     });
 };
 
