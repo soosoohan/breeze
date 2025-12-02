@@ -703,10 +703,10 @@ function reveal(index, triggeredBySpecial = false) {
       if (newIdx >= 0 && newIdx < totalCells) {
         if (d === -1 || d === 1) {
           if (Math.floor(index / gridSize) === Math.floor(newIdx / gridSize)) {
-            reveal(newIdx, true);  // 클로버에 의해 열림
+            reveal(newIdx, true);
           }
         } else {
-          reveal(newIdx, true);  // 클로버에 의해 열림
+          reveal(newIdx, true);
         }
       }
     }
@@ -722,16 +722,18 @@ function reveal(index, triggeredBySpecial = false) {
         const ny = y + dy;
         if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize) {
           const nIdx = ny * gridSize + nx;
-          if (!revealed[nIdx]) reveal(nIdx, true);  // 데이지에 의해 열림
+          if (!revealed[nIdx]) reveal(nIdx, true);
         }
       }
     }
   } else {
-    // 특수 타일에 의해 열린 칸이면 초록색
-    if (triggeredBySpecial) {
+    cell.textContent = board[index];
+    
+    // 단어 글자가 아니고, 특수 타일에 의해 열린 경우만 초록색
+    const isWordLetter = usedIndexes.has(index);
+    if (triggeredBySpecial && !isWordLetter) {
       cell.classList.add('special-reveal');
     }
-    cell.textContent = board[index];
   }
 }
 
