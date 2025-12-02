@@ -405,7 +405,10 @@ window.onload = () => {
   }
 
   fetch('wordpools/' + poolFile + '.json')
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error('Failed to load word pool');
+      return res.json();
+    })
     .then(data => {
       document.getElementById('game-title').textContent = data.title || 'Woffers Breeze';
       const rawText = data.description || 'Solo challenge';
@@ -420,7 +423,10 @@ window.onload = () => {
       init();
     })
     .catch(err => {
-      document.body.innerHTML = '<p>❌ 워드풀 로딩 중 오류 발생: ' + err.message + '</p>';
+      console.log('워드풀 로딩 실패, 기본 단어로 게임 시작:', err.message);
+      // 기본 단어로 게임 시작
+      words = ['GAME', 'ABOUT', 'ACTOR', 'PUZZLE', 'ACROSS', 'ADDRESS', 'AIRPORT', 'ANYTHING', 'BATHROOM', 'AFTERNOON', 'BEAUTIFUL'];
+      init();
     });
 };
 
