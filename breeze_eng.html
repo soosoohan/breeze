@@ -11,23 +11,23 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>Worpuzz - Medium Grid Word Search Game | Soosooland</title>
+    <title>Worpuzz breeze- solo Word Search Game | Soosooland</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Battle the computer in medium-sized word grid! Find clovers and daisies for bonus turns. Strategic word search puzzle game.">
-    <meta name="keywords" content="worpuzz, word search, word puzzle, medium difficulty, vocabulary game, strategic word game, brain puzzle, word finder">
+    <meta name="description" content="medium-sized word grid! Find clovers and daisies and words. Strategic word search puzzle game.">
+    <meta name="keywords" content="worpuzz, word search, word puzzle, vocabulary game, strategic word game, brain puzzle, word finder">
     <meta name="author" content="Soosooland">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Worpuzz - Medium Grid Word Search">
-    <meta property="og:description" content="Battle the computer in medium grid! Find clovers and daisies for bonus turns">
+    <meta property="og:title" content="Worpuzz breeze- Medium Grid Word Search">
+    <meta property="og:description" content="Find clovers, daisies and words">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://soosooland.com/worpuzz/bot_eng.html">
+    <meta property="og:url" content="https://soosooland.com/breeze/breeze_eng.html">
     <meta property="og:image" content="https://soosooland.com/images/worpuzz.jpeg">
     <meta property="og:site_name" content="Soosooland">
-    <link rel="canonical" href="https://soosooland.com/worpuzz/bot_eng.html">
-    <link rel="alternate" hreflang="ko" href="https://soosooland.com/worpuzz/bot_kor.html">
-    <link rel="alternate" hreflang="en" href="https://soosooland.com/worpuzz/bot_eng.html">
+    <link rel="canonical" href="https://soosooland.com/breeze/breeze_eng.html">
+    <link rel="alternate" hreflang="ko" href="https://soosooland.com/breeze/breeze_kor.html">
+    <link rel="alternate" hreflang="en" href="https://soosooland.com/breeze/breeze_eng.html">
     <link rel="stylesheet" href="https://soosooland.com/css/protection.css">
     <script src="https://soosooland.com/js/protection.js"></script>
 <style>
@@ -342,7 +342,7 @@
   <div id="npcScore">
     <h2>INFO:</h2>
     <p id="wordsDisplay">Words: 0 / 0</p>
-    <p id="mistakesDisplay">Mistakes: 0 / 7</p>
+    <p id="mistakesDisplay">Mistakes: 0 / 11</p>
     <p id="cloverCountDisplay">Clovers: 0</p>
     <p id="daisyCountDisplay">Daisies: 0</p>
   </div>
@@ -357,7 +357,7 @@
   <div id="info-mobile">
     <h2>INFO</h2>
     <p id="wordsDisplayMobile">Words: 0 / 0</p>
-    <p id="mistakesDisplayMobile">Mistakes: 0 / 7</p>
+    <p id="mistakesDisplayMobile">Mistakes: 0 / 11</p>
     <p id="cloverCountDisplayMobile">Clovers: 0</p>
     <p id="daisyCountDisplayMobile">Daisies: 0</p>
   </div>
@@ -801,7 +801,7 @@ function checkGameEnd() {
     if (foundWords.size >= totalWords && totalWords > 0) {
       resultText = `You Win! Found ${userWords} / ${totalWords} words.`;
     } else if (mistakes >= mistakeLimit) {
-      resultText = `Game Over! Mistakes reached ${mistakes} / ${mistakeLimit}. Found ${userWords} / ${totalWords} words.`;
+      resultText = `Game Over! Found ${userWords} / ${totalWords} words.`;
     }
     currentTurnEl.textContent = resultText;
     setTimeout(() => {
