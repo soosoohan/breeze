@@ -130,29 +130,35 @@
     user-select: none;
     border-radius: 4px;
   }
+.revealed {
+  background-color: #fff;  /* 기본 흰색 */
+  font-size: 1.5em;
+}
 
-  .revealed {
-    background-color: #fff;
-    font-size: 1.5em;
-  }
-  
-  .revealed.clover {
-    background-color: #fff;
-    font-size: 1.5em;
-  }
-  
-  .revealed.clover span {
-    font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
-  }
+.revealed.clover {
+  background-color: #c8f7c5;  /* 연한 초록 */
+  font-size: 1.5em;
+}
 
-  .revealed.daisy {
-    background-color: #fff4e0; 
-    font-size: 1.5em;
-  }
-  
-  .revealed.daisy span {
-    font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
-  }
+.revealed.clover span {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+}
+
+.revealed.daisy {
+  background-color: #c8f7c5;  /* 연한 초록 (클로버랑 같게) */
+  font-size: 1.5em;
+}
+
+.revealed.daisy span {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+}
+
+.revealed.mistake {
+  background-color: #ffc0cb;  /* 분홍색 */
+}
+.revealed.special-reveal {
+  background-color: #c8f7c5;  /* 연한 초록 - 클로버/데이지 주변 */
+}
 
   /* 데스크톱 점수판 */
   #npcScore, #userScore {
@@ -184,7 +190,7 @@
   }
 
   .word-owned-user {
-    background-color: #a0fab5;
+    background-color: #a0fab5 !important;
   }
   
   .word-owned-npc {
@@ -681,7 +687,7 @@ function fillEmptyCells() {
   }
 }
 
-function reveal(index) {
+function reveal(index, triggeredBySpecial = false) {
   if (revealed[index]) return;
   revealed[index] = true;
   const cell = gameEl.children[index];
@@ -697,10 +703,10 @@ function reveal(index) {
       if (newIdx >= 0 && newIdx < totalCells) {
         if (d === -1 || d === 1) {
           if (Math.floor(index / gridSize) === Math.floor(newIdx / gridSize)) {
-            reveal(newIdx);
+            reveal(newIdx, true);  // 클로버에 의해 열림
           }
         } else {
-          reveal(newIdx);
+          reveal(newIdx, true);  // 클로버에 의해 열림
         }
       }
     }
@@ -716,11 +722,15 @@ function reveal(index) {
         const ny = y + dy;
         if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize) {
           const nIdx = ny * gridSize + nx;
-          if (!revealed[nIdx]) reveal(nIdx);
+          if (!revealed[nIdx]) reveal(nIdx, true);  // 데이지에 의해 열림
         }
       }
     }
   } else {
+    // 특수 타일에 의해 열린 칸이면 초록색
+    if (triggeredBySpecial) {
+      cell.classList.add('special-reveal');
+    }
     cell.textContent = board[index];
   }
 }
@@ -752,21 +762,20 @@ function handleClick(index) {
   const isWordLetter = usedIndexes.has(index);
   const isSpecial = clovers.has(index) || daisies.has(index);
 
-  // Success: clicking a letter that belongs to a word OR clicking special tiles
   if (isWordLetter || isSpecial) {
     reveal(index);
-    // if reveal part of a word, check whole word
     if (isWordLetter) checkWords();
     updateScore();
   } else {
-    // Miss: clicking a filler tile (not part of any word and not special)
+    // 실수한 칸
     mistakes++;
-    reveal(index); // still reveal the letter so player sees it
-    updateInfoDisplay();
-    // small visual feedback: briefly flash red
+    reveal(index);
+    
+    // 분홍색으로 표시
     const cell = gameEl.children[index];
-    cell.style.backgroundColor = '#ffb3b3';
-    setTimeout(() => { if (cell) cell.style.backgroundColor = ''; }, 300);
+    cell.classList.add('mistake');  // 이 줄 추가!
+    
+    updateInfoDisplay();
   }
 
   updateInfoDisplay();
