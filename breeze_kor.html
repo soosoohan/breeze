@@ -799,9 +799,9 @@ function checkGameEnd() {
     const userWords = foundBy.user.length;
     let resultText = '';
     if (foundWords.size >= totalWords && totalWords > 0) {
-      resultText = `당신이 이겼습니다! ${totalWords}중에서  ${userWords} 개 단어를 찾았습니다.`;
+      resultText = `당신이 이겼습니다! 단어 ${totalWords}개 중에서  ${userWords}개를 찾았습니다.`;
     } else if (mistakes >= mistakeLimit) {
-      resultText = `게임이 끝났습니다! ${totalWords}개의 단어 중에서  ${userWords}를 찾았습니다.`;
+      resultText = `게임이 끝났습니다! 단어 ${totalWords}개 중에서  ${userWords}개를 찾았습니다.`;
     }
     currentTurnEl.textContent = resultText;
     setTimeout(() => {
