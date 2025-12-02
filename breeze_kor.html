@@ -11,23 +11,23 @@
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>Worpuzz - Medium Grid Word Search Game | Soosooland</title>
+    <title>워퍼즈 브리즈 - Medium Grid Word Search solo Game | Soosooland</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Battle the computer in medium-sized word grid! Find clovers and daisies for bonus turns. Strategic word search puzzle game.">
-    <meta name="keywords" content="worpuzz, word search, word puzzle, medium difficulty, vocabulary game, strategic word game, brain puzzle, word finder">
+    <meta name="description" content="find words in medium-sized word grid! Find clovers and daisies for bonus turns. Strategic word search puzzle game.">
+    <meta name="keywords" content="worpuzz, word search, word puzzle, solo game, vocabulary game, strategic word game, brain puzzle, word finder">
     <meta name="author" content="Soosooland">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="Worpuzz - Medium Grid Word Search">
-    <meta property="og:description" content="Battle the computer in medium grid! Find clovers and daisies for bonus turns">
+    <meta property="og:title" content="Worpuzz breeze- Medium Grid Word Search">
+    <meta property="og:description" content="Find words in medium grid! Find clovers and daisies for bonus turns">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://soosooland.com/worpuzz/bot_eng.html">
+    <meta property="og:url" content="https://soosooland.com/breeze/breeze_eng.html">
     <meta property="og:image" content="https://soosooland.com/images/worpuzz.jpeg">
     <meta property="og:site_name" content="Soosooland">
-    <link rel="canonical" href="https://soosooland.com/worpuzz/bot_eng.html">
-    <link rel="alternate" hreflang="ko" href="https://soosooland.com/worpuzz/bot_kor.html">
-    <link rel="alternate" hreflang="en" href="https://soosooland.com/worpuzz/bot_eng.html">
+    <link rel="canonical" href="https://soosooland.com/breeze/breeze_kor.html">
+    <link rel="alternate" hreflang="ko" href="https://soosooland.com/breeze/breeze_eng.html">
+    <link rel="alternate" hreflang="en" href="https://soosooland.com/breeze/breeze_kor.html">
     <link rel="stylesheet" href="https://soosooland.com/css/protection.css">
     <script src="https://soosooland.com/js/protection.js"></script>
 <style>
@@ -200,8 +200,8 @@
 
   #game {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(12, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
     grid-gap: 4px;
     padding: 10px;
     background-color: #0E756D;
@@ -332,52 +332,52 @@
 
 <body>
 <button class="back-button"  onclick="location.href='index.html'">←</button>
-<h1 id="game-title">Worpuzz Breeze</h1>
-<p id="game-desc">Solo challenge —  Click letters or special tiles (🍀/🌼)find the words</p>
+<h1 id="game-title">워퍼즈 브리즈</h1>
+<p id="game-desc"> 혼자 하는 워퍼즈 (🍀/🌼) 격자 속의 단어를 찾으세요.</p>
 
 <div id="currentTurn"></div>
 
 <!-- 데스크톱: 게임판 + 양쪽 점수판 -->
 <div class="container">
   <div id="npcScore">
-    <h2>INFO:</h2>
-    <p id="wordsDisplay">Words: 0 / 0</p>
-    <p id="mistakesDisplay">Mistakes: 0 / 7</p>
-    <p id="cloverCountDisplay">Clovers: 0</p>
-    <p id="daisyCountDisplay">Daisies: 0</p>
+    <h2>정보:</h2>
+    <p id="wordsDisplay">단어: 0 / 0</p>
+    <p id="mistakesDisplay">실수 : 0 / 13</p>
+    <p id="cloverCountDisplay">토끼풀: 0</p>
+    <p id="daisyCountDisplay">데이지: 0</p>
   </div>
   <div id="game"></div>
   <div id="userScore">
-    <h2>FOUND WORDS:</h2>
+    <h2>찾은 단어:</h2>
   </div>
 </div>
 
 <!-- 모바일: 게임판 아래 점수판 -->
 <div class="score-container">
   <div id="info-mobile">
-    <h2>INFO</h2>
-    <p id="wordsDisplayMobile">Words: 0 / 0</p>
-    <p id="mistakesDisplayMobile">Mistakes: 0 / 7</p>
-    <p id="cloverCountDisplayMobile">Clovers: 0</p>
-    <p id="daisyCountDisplayMobile">Daisies: 0</p>
+    <h2>정보</h2>
+    <p id="wordsDisplayMobile">단어: 0 / 0</p>
+    <p id="mistakesDisplayMobile">실수: 0 / 13</p>
+    <p id="cloverCountDisplayMobile">토끼풀: 0</p>
+    <p id="daisyCountDisplayMobile">데이지: 0</p>
   </div>
   <div id="found-mobile">
-    <h2>FOUND WORDS</h2>
+    <h2>찾은 단어</h2>
   </div>
 </div>
 <div class="btn-container">
-  <button id="retryBtn">↻ Restart</button>
+  <button id="retryBtn">↻재시작</button>
 </div>
 
 <script>
-const gridSize = 12;
+const gridSize = 10;
 const totalCells = gridSize * gridSize;
 
 let board, revealed, wordMap, foundWords, foundBy, words, usedIndexes;
 let clovers = new Set(), daisies = new Set();
 let resultShown = false;
 let mistakes = 0;
-const mistakeLimit = 11; // Breeze rule
+const mistakeLimit = 13; // Breeze rule
 
 const gameEl = document.getElementById('game');
 const userScoreEl = document.getElementById('userScore');
@@ -399,13 +399,16 @@ window.onload = () => {
   const urlParams = new URLSearchParams(window.location.search);
   const poolFile = urlParams.get('pool');
   if (!poolFile) {
-    words = ['GAME', 'ABOUT', 'ACTOR', 'PUZZLE', 'ACROSS', 'ADDRESS', 'AIRPORT', 'ANYTHING', 'BATHROOM', 'AFTERNOON', 'BEAUTIFUL' ];
+         words = ['계륵', '각골난망', '각주구검', '거두절미', '개과천선', '감지덕지', '감언이설', '결초보은','경천동비', '견물생심', '견원지간', '결자해지', '소문만복래'];
     init();
     return;
   }
 
   fetch('wordpools/' + poolFile + '.json')
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error('Failed to load word pool');
+      return res.json();
+    })
     .then(data => {
       document.getElementById('game-title').textContent = data.title || 'Woffers Breeze';
       const rawText = data.description || 'Solo challenge';
@@ -420,7 +423,10 @@ window.onload = () => {
       init();
     })
     .catch(err => {
-      document.body.innerHTML = '<p>❌ 워드풀 로딩 중 오류 발생: ' + err.message + '</p>';
+      console.log('워드풀 로딩 실패, 기본 단어로 게임 시작:', err.message);
+      // 기본 단어로 게임 시작
+      words = ['계륵', '각골난망', '각주구검', '거두절미', '개과천선', '감지덕지', '감언이설', '결초보은','경천동비', '견물생심', '견원지간', '결자해지', '소문만복래'];
+      init();
     });
 };
 
@@ -723,7 +729,7 @@ function reveal(index) {
 
 function updateScore() {
   const totalWords = Object.keys(wordMap).length;
-  const foundHTML = `<h2>FOUND WORDS:</h2>` + foundBy.user.map(w => `<p>${w}</p>`).join("");
+  const foundHTML = `<h2>찾은 단어:</h2>` + foundBy.user.map(w => `<p>${w}</p>`).join("");
   userScoreEl.innerHTML = foundHTML;
   userScoreMobileEl.innerHTML = foundHTML;
 }
@@ -732,14 +738,14 @@ function updateInfoDisplay() {
   const totalWords = Object.keys(wordMap).length;
   const foundCount = foundWords.size;
   
-  wordsDisplay.textContent = `Words: ${foundCount} / ${totalWords}`;
-  wordsDisplayMobile.textContent = `Words: ${foundCount} / ${totalWords}`;
-  mistakesDisplay.textContent = `Mistakes: ${mistakes} / ${mistakeLimit}`;
-  mistakesDisplayMobile.textContent = `Mistakes: ${mistakes} / ${mistakeLimit}`;
-  cloverCountDisplay.textContent = `Clovers: ${clovers.size}`;
-  cloverCountDisplayMobile.textContent = `Clovers: ${clovers.size}`;
-  daisyCountDisplay.textContent = `Daisies: ${daisies.size}`;
-  daisyCountDisplayMobile.textContent = `Daisies: ${daisies.size}`;
+  wordsDisplay.textContent = `단어: ${foundCount} / ${totalWords}`;
+  wordsDisplayMobile.textContent = `단어: ${foundCount} / ${totalWords}`;
+  mistakesDisplay.textContent = `실수: ${mistakes} / ${mistakeLimit}`;
+  mistakesDisplayMobile.textContent = `실수: ${mistakes} / ${mistakeLimit}`;
+  cloverCountDisplay.textContent = `토끼풀: ${clovers.size}`;
+  cloverCountDisplayMobile.textContent = `토끼풀: ${clovers.size}`;
+  daisyCountDisplay.textContent = `데이지: ${daisies.size}`;
+  daisyCountDisplayMobile.textContent = `데이지: ${daisies.size}`;
 }
 
 function handleClick(index) {
@@ -793,9 +799,9 @@ function checkGameEnd() {
     const userWords = foundBy.user.length;
     let resultText = '';
     if (foundWords.size >= totalWords && totalWords > 0) {
-      resultText = `You Win! Found ${userWords} / ${totalWords} words.`;
+      resultText = `당신이 이겼습니다! ${totalWords}중에서  ${userWords} 개 단어를 찾았습니다.`;
     } else if (mistakes >= mistakeLimit) {
-      resultText = `Game Over! Mistakes reached ${mistakes} / ${mistakeLimit}. Found ${userWords} / ${totalWords} words.`;
+      resultText = `게임이 끝났습니다! ${totalWords}개의 단어 중에서  ${userWords}를 찾았습니다.`;
     }
     currentTurnEl.textContent = resultText;
     setTimeout(() => {
