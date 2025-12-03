@@ -14,13 +14,13 @@
     <title>워퍼즈 브리즈 - Medium Grid Word Search solo Game | Soosooland</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="find words in medium-sized word grid! Find clovers for bonus turns. Strategic word search puzzle game.">
+    <meta name="description" content="find words in medium-sized word grid! Find clovers and daisies for bonus turns. Strategic word search puzzle game.">
     <meta name="keywords" content="worpuzz, word search, word puzzle, solo game, vocabulary game, strategic word game, brain puzzle, word finder">
     <meta name="author" content="Soosooland">
     
     <!-- Open Graph -->
     <meta property="og:title" content="Worpuzz breeze- Medium Grid Word Search">
-    <meta property="og:description" content="Find words in medium grid! Find clovers for bonus turns">
+    <meta property="og:description" content="Find words in medium grid! Find clovers and daisies for bonus turns">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://soosooland.com/breeze/breeze_eng.html">
     <meta property="og:image" content="https://soosooland.com/images/worpuzz.jpeg">
@@ -154,7 +154,7 @@
 }
 
 .revealed.mistake {
-  background-color: #fff  /* 모래색 */
+  background-color: #f2c4cc  /* 카키색 */
 }
 .revealed.special-reveal {
   background-color: #c8f7c5;  /* 연한 초록 - 클로버/데이지 주변 */
@@ -349,8 +349,8 @@
     <h2>정보:</h2>
     <p id="wordsDisplay">단어: 0 / 0</p>
     <p id="mistakesDisplay">실수 : 0 / 13</p>
-    <p id="cloverCountDisplay"></p>
-    <p id="daisyCountDisplay">토끼풀: 0</p>
+    <p id="cloverCountDisplay">토끼풀: 0</p>
+    <p id="daisyCountDisplay">데이지: 0</p>
   </div>
   <div id="game"></div>
   <div id="userScore">
@@ -364,8 +364,8 @@
     <h2>정보</h2>
     <p id="wordsDisplayMobile">단어: 0 / 0</p>
     <p id="mistakesDisplayMobile">실수: 0 / 13</p>
-    <p id="cloverCountDisplayMobile"></p>
-    <p id="daisyCountDisplayMobile">토끼풀: 0</p>
+    <p id="cloverCountDisplayMobile">토끼풀: 0</p>
+    <p id="daisyCountDisplayMobile">데이지: 0</p>
   </div>
   <div id="found-mobile">
     <h2>찾은 단어</h2>
@@ -482,8 +482,8 @@ function init() {
   }
 
   // Breeze rules: place specials by percentage of total cells, on empty positions only
-  const cloverCount = Math.floor(totalCells * 0.0); // 0%
-  const daisyCount = Math.floor(totalCells * 0.2);  // 20%
+  const cloverCount = Math.floor(totalCells * 0.15); // 15%
+  const daisyCount = Math.floor(totalCells * 0.07);  // 7%
   placeDaisies(daisyCount);
   placeClovers(cloverCount);
   fillEmptyCells();
@@ -711,7 +711,7 @@ function reveal(index, triggeredBySpecial = false) {
       }
     }
   } else if (daisies.has(index)) {
-    cell.innerHTML = '<span>🍀</span>';
+    cell.innerHTML = '<span>🌼</span>';
     cell.classList.add('daisy');
     const x = index % gridSize;
     const y = Math.floor(index / gridSize);
@@ -752,10 +752,10 @@ function updateInfoDisplay() {
   wordsDisplayMobile.textContent = `단어: ${foundCount} / ${totalWords}`;
   mistakesDisplay.textContent = `실수: ${mistakes} / ${mistakeLimit}`;
   mistakesDisplayMobile.textContent = `실수: ${mistakes} / ${mistakeLimit}`;
-  cloverCountDisplay.textContent = ``;
-  cloverCountDisplayMobile.textContent = ``;
-  daisyCountDisplay.textContent = `토끼풀: ${daisies.size}`;
-  daisyCountDisplayMobile.textContent = `토끼풀: ${daisies.size}`;
+  cloverCountDisplay.textContent = `토끼풀: ${clovers.size}`;
+  cloverCountDisplayMobile.textContent = `토끼풀: ${clovers.size}`;
+  daisyCountDisplay.textContent = `데이지: ${daisies.size}`;
+  daisyCountDisplayMobile.textContent = `데이지: ${daisies.size}`;
 }
 
 function handleClick(index) {
