@@ -154,7 +154,7 @@
 }
 
 .revealed.mistake {
-  background-color: #f2c4cc  /* 카키색 */
+  background-color: #fff  /* 카키색 */
 }
 .revealed.special-reveal {
   background-color: #c8f7c5;  /* 연한 초록 - 클로버/데이지 주변 */
@@ -482,8 +482,8 @@ function init() {
   }
 
   // Breeze rules: place specials by percentage of total cells, on empty positions only
-  const cloverCount = Math.floor(totalCells * 0.15); // 15%
-  const daisyCount = Math.floor(totalCells * 0.07);  // 7%
+  const cloverCount = Math.floor(totalCells * 0.5); // 5%
+  const daisyCount = Math.floor(totalCells * 0.15);  // 15%
   placeDaisies(daisyCount);
   placeClovers(cloverCount);
   fillEmptyCells();
