@@ -482,8 +482,8 @@ function init() {
   }
 
   // Breeze rules: place specials by percentage of total cells, on empty positions only
-  const cloverCount = Math.floor(totalCells * 0.7); // 7%
-  const daisyCount = Math.floor(totalCells * 0.15);  // 15%
+  const cloverCount = Math.floor(totalCells * 0.1); // 10%
+  const daisyCount = Math.floor(totalCells * 0.1);  // 10%
   placeDaisies(daisyCount);
   placeClovers(cloverCount);
   fillEmptyCells();
@@ -686,6 +686,7 @@ function fillEmptyCells() {
     }
   }
 }
+
 function reveal(index, triggeredBySpecial = false) {
   if (revealed[index]) return;
   revealed[index] = true;
@@ -734,7 +735,13 @@ function reveal(index, triggeredBySpecial = false) {
       cell.classList.add('special-reveal');
     }
   }
+  
+  // ✨ 추가: 특수 타일에 의해 열린 경우, 단어 완성 체크
+  if (triggeredBySpecial && usedIndexes.has(index)) {
+    checkWords();
+  }
 }
+
 
 function updateScore() {
   const totalWords = Object.keys(wordMap).length;
