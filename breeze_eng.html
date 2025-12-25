@@ -784,7 +784,8 @@ function getNeighboringWordLetters(index) {
       if (nx >= 0 && nx < gridSize && ny >= 0 && ny < gridSize) {
         const nIdx = ny * gridSize + nx;
         
-        if (!revealed[nIdx] && usedIndexes.has(nIdx) && 
+        // 👇 단어 글자도 아니고, 클로버/데이지도 아닌 일반 칸만
+        if (!revealed[nIdx] && !usedIndexes.has(nIdx) && 
             !clovers.has(nIdx) && !daisies.has(nIdx)) {
           neighbors.push(nIdx);
         }
