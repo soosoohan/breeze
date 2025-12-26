@@ -226,15 +226,23 @@ font-size: 1.1em;
 </div>
   </div>
    <script>      
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
     const screenWidth = window.innerWidth;
-
-    // 화면이 560px 이하일 때 미니로 리다이렉트
+    
     if (screenWidth < 560 && !sessionStorage.getItem('fromMini')) {
         redirectToPop();
     }
 });
 
+// 뒤로가기 대응
+window.addEventListener('pageshow', (event) => {
+    if (event.persisted) { // 캐시에서 복원된 경우
+        const screenWidth = window.innerWidth;
+        if (screenWidth < 560 && !sessionStorage.getItem('fromMini')) {
+            redirectToPop();
+        }
+    }
+});
 function redirectToPop() {
     const overlay = document.createElement('div');
     overlay.innerHTML = `
