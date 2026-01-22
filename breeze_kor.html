@@ -161,12 +161,21 @@ h1 {
 .revealed.special-reveal {
   background-color: #c8f7c5;  /* 연한 초록 - 클로버/데이지 주변 */
 }
-
   /* 데스크톱 점수판 */
-  #npcScore, #userScore {
+  #npcScore {
     background: #209087;
     color: #fff;
-    width: 180px;
+    width: 150px;
+    height: 480px;
+    padding: 15px;
+    box-sizing: border-box;
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+  #userScore {
+    background: #209087;
+    color: #fff;
+    width: 210px;
     height: 480px;
     padding: 15px;
     box-sizing: border-box;
@@ -181,10 +190,13 @@ h1 {
   }
   
   #npcScore p, #userScore p {
+    display: inline-block;
     font-size: 1.1em;
-    margin: 5px 0;
+    margin: 3px 4px;
     text-align: left;
- }
+    padding: 2px 6px;
+    color: #fff;
+}
 
   /* 모바일 점수판 - 기본적으로 숨김 */
   .score-container {
