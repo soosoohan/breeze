@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head> 
+<head>
+<script>
+  if (window.top !== window.self) {
+    window.top.location = "https://soosooland.com";
+  }
+   if (window.innerWidth < 580) {
+    window.location.href = 'https://soosooland.com/pop/';
+  }
+  console.log("© 2025-2026 Soosooland by 한수수. All rights reserved.");
+  console.log("https://soosooland.com");
+  console.log("🎮 Worpuzz Breeze | Born: 2025-12-02");
+</script>
    <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4YZHC1G9FN"></script>
 <script>
@@ -94,16 +105,6 @@ color: #FF9494; /* 포인트 핑크 */
 margin-bottom: 20px;
 }
 
-.redirect-message {
-background-color: #FF9494;
-color: white;
-padding: 15px;
-border-radius: 8px;
-margin: 20px auto;
-max-width: 600px;
-font-size: 1.1em;
-}
-
 .description {
 margin-bottom: 30px;
 font-size: 1.1em;
@@ -175,16 +176,6 @@ cursor: pointer;
 
 .description button:hover {
 background-color: #FF7373;
-}
-
-.redirect-message {
-background-color: #FF9494;
-color: white;
-padding: 15px;
-border-radius: 8px;
-margin: 20px auto;
-max-width: 600px;
-font-size: 1.1em;
 }
   .back-button {
         position: absolute;
@@ -281,75 +272,7 @@ font-size: 1.1em;
 </div>
   </div>
    <script>      
-window.addEventListener('load', () => {
-    const screenWidth = window.innerWidth;
-    
-    if (screenWidth < 560 && !sessionStorage.getItem('fromMini')) {
-        redirectToPop();
-    }
-});
-
-// 뒤로가기 대응
-window.addEventListener('pageshow', (event) => {
-    if (event.persisted) { // 캐시에서 복원된 경우
-        const screenWidth = window.innerWidth;
-        if (screenWidth < 560 && !sessionStorage.getItem('fromMini')) {
-            redirectToPop();
-        }
-    }
-});
-function redirectToPop() {
-    const overlay = document.createElement('div');
-    overlay.innerHTML = `
-        <div style="
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            color: white;
-            text-align: center;
-            font-family: inherit;
-        ">
-            <div style="padding: 30px;">
-                <div style="font-size: 48px; margin-bottom: 20px;">⚠️</div>
-                <div style="font-size: 20px; font-weight: bold; margin-bottom: 15px;">
-                    화면이 너무 작습니다
-                </div>
-                <div style="font-size: 16px; margin-bottom: 10px;">
-                    Screen width must be at least 560px
-                </div>
-                <div style="font-size: 14px; opacity: 0.8; margin-bottom: 25px;">
-                    브리즈 팝으로 자동 이동합니다...<br>
-                    Redirecting to Breeze Pop...
-                </div>
-                <div class="loading-dots" style="font-size: 30px; letter-spacing: 5px;">
-                    ⚡⚡⚡
-                </div>
-            </div>
-        </div>
-        <style>
-            @keyframes blink {
-                0%, 100% { opacity: 1; }
-                50% { opacity: 0.3; }
-            }
-            .loading-dots {
-                animation: blink 1.5s infinite;
-            }
-        </style>
-    `;
-    document.body.appendChild(overlay);
-    
-    setTimeout(() => {
-        window.location.href = 'https://soosooland.com/pop';
-    }, 1500);
-}
-function toggleLanguage(lang) {
+ function toggleLanguage(lang) {
         const koreanDesc = document.getElementById('korean-description');
         const englishDesc = document.getElementById('english-description');
         const buttons = document.querySelectorAll('.language-button');
